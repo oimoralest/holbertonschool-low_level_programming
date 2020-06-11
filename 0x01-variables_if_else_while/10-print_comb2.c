@@ -1,5 +1,5 @@
 #include <stdio.h>
-/*
+/**
  *main - entry
  *
  *Description: program that prints the numbers from 00 to 99
