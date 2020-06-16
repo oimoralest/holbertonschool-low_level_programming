@@ -1,8 +1,6 @@
 #include "holberton.h"
 /**
- *main - entry
- *
- *Description: description
+ *jack_bauer - prints every minute of the day of Jack Bauer
  *
  *Return: void
  */
@@ -16,12 +14,12 @@ void jack_bauer(void)
 		{
 			r = i / 10;
 			_putchar(r + '0');
-			r= i % 10;
+			r = i % 10;
 			_putchar(r + '0');
 			_putchar(':');
-			r= j / 10;
+			r = j / 10;
 			_putchar(r + '0');
-			r= j % 10;
+			r = j % 10;
 			_putchar(r + '0');
 			_putchar('\n');
 		}
