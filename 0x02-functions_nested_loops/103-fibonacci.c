@@ -20,6 +20,6 @@ int main(void)
 		i = j;
 		j = sum_0;
 	}
-	printf("Sum of the even_valued terms is: %i\n", sum_1);
+	printf("%i\n", sum_1);
 	return (0);
 }
