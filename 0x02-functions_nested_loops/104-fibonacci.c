@@ -31,8 +31,11 @@ int main(void)
 	{
 		tail = a + b;
 		head = i + j;
-		if ((a / 10) + (b / 10) >= 10)
+		if (tail > 10000000000)
+		{
 			head += 1;
+			tail = tail % 10000000000;
+		}
 		if (k != 98)
 			printf("%li%li, ", head, tail);
 		else
