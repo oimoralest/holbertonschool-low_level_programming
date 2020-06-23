@@ -14,8 +14,8 @@ void print_array(int *a, int n)
 	for (c = 0; c < n; c++)
 	{
 		if (c != n - 1)
-			printf("%i, ", *(a + c));
+			printf("%d, ", a[c]);
 		else
-			printf("%i\n", *(a + c));
+			printf("%d\n", a[c]);
 	}
 }
