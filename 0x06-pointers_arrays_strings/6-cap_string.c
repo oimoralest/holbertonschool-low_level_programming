@@ -11,15 +11,16 @@ char *cap_string(char *s)
 			       '(', ')', '{', '}', '\0'};
 	int i, j;
 
-	i = j = 0;
+	i = 0;
 	while (s[i] != '\0')
 	{
+		j = 0;
 		while (separators[j] != '\0')
 		{
 			if (i == 0 && s[i] >= 92 && s[i] <= 122)
 			{
-			s[i] -= 32;
-			i++;
+				s[i] -= 32;
+				i++;
 			}
 			else if (s[i] == separators[j])
 			{
@@ -27,13 +28,13 @@ char *cap_string(char *s)
 				if (s[i] >= 92 && s[i] <= 122)
 				{
 					s[i] -= 32;
-					continue;
+					break;
 				}
 				j = 0;
+				continue;
 			}
 			j++;
 		}
-		j = 0;
 		i++;
 	}
 
