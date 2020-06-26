@@ -1,4 +1,5 @@
 #include "holberton.h"
+#define INT_MIN -2147483648
 /**
  *print_number - prints a integer
  *@n: integer to print
@@ -7,12 +8,18 @@
  */
 void print_number(int n)
 {
-	int power, c;
+	int power, c, min;
 
 	power = 10;
 	c = 1;
+	min = 0;
 	if (n < 0)
 	{
+		if (n == INT_MIN)
+		{
+			min = 1;
+			n += 1;
+		}
 		_putchar('-');
 		n *= -1;
 	}
@@ -36,5 +43,7 @@ void print_number(int n)
 			}
 		}
 	}
+	if (min)
+		n += 1;
 	_putchar(n + '0');
 }
