@@ -13,6 +13,7 @@ char *_strstr(char *haystack, char *needle)
 	int i = 0;
 	char *ip;
 
+	ip = haystack;
 	while (*haystack != '\0')
 	{
 		if (*haystack == needle[i])
