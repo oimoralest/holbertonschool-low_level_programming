@@ -1,7 +1,7 @@
 #include "holberton.h"
 
 /**
- *returns the length of a string
+ *_strlen_recursion - returns the length of a string
  *@s: pointer to the string
  *
  *Return: len length of the string
