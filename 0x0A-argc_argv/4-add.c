@@ -1,6 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
-int check(char *);
+#include "holberton.h"
+/**
+ *main - adds positive numbers
+ *@argc: number of arguments supplied to the program
+ *@argv: array of pointers to the arguments supplied to the program
+ *
+ *Return: 0 success
+ *        1 error, there are arguments withs symbols that are not digits
+ */
 int main(int argc, char *argv[])
 {
 	int sum = 0;
@@ -19,14 +27,13 @@ int main(int argc, char *argv[])
 			}
 		printf("%i\n", sum);
 	}
-      	else
+	else
 		printf("0\n");
-
 exit: return (_case == 0 ? 0 : 1);
 }
-
 /**
- *
+ *check - checks if there are character that are not digits
+ *@s: pointer to a string
  *Return: 1 if there are only digits
  *        0 if there is character that is not digit
  */
