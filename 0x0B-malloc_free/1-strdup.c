@@ -13,6 +13,8 @@ char *_strdup(char *str)
 	char *ptr;
 	unsigned int i = 0;
 
+	if (str == NULL)
+		goto exit;
 	ptr = malloc(_size(str) * sizeof(char));
 	if (ptr != NULL)
 		while (i < _size(ptr))
@@ -21,7 +23,7 @@ char *_strdup(char *str)
 			i++;
 		}
 
-	return (str == NULL ? NULL : ptr);
+exit:	return (str == NULL ? NULL : ptr);
 }
 /**
  *_size - returns the length of a string
