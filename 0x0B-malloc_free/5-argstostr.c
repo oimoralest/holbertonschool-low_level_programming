@@ -33,11 +33,11 @@ char *argstostr(int ac, char **av)
 		return (NULL);
 	while (i < ac)
 	{
-		if ((ptr[k++] = av[i][j++]) != '\0')
-			;
+		if (av[i][j] != '\0')
+			ptr[k++] = av[i][j++];
 		else
 		{
-			ptr[--k] = '\n', k++, i++;
+			ptr[k] = '\n', k++, i++;
 			j = 0;
 		}
 	}
