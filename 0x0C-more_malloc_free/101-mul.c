@@ -134,7 +134,12 @@ void print_mul(int *s, int len)
 	int i = 0;
 
 	if (s[i] == 0)
-		i++;
+	{
+		while (s[i] == 0 && i < len)
+		       i++;
+	}
+	if (i == len)
+		_putchar('0');
 	while (i < len)
 	{
 		_putchar(s[i] + '0');
