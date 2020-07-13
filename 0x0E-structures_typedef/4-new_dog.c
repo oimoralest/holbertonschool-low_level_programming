@@ -18,13 +18,20 @@ dog_t *new_dog(char *name, float age, char *owner)
 	len_name = str_len(name);
 	ptr->name = malloc((unsigned int)len_name * sizeof(char));
 	if (ptr->name == NULL)
+	{
+		free(ptr);
 		return (NULL);
+	}
 	str_cp(ptr->name, name);
 	ptr->age = age;
 	len_owner = str_len(owner);
 	ptr->owner = malloc((unsigned int)len_owner * sizeof(char));
 	if (ptr->owner == NULL)
+	{
+		free(ptr->name);
+		free(ptr);
 		return (NULL);
+	}
 	str_cp(ptr->owner, owner);
 
 	return (ptr);
