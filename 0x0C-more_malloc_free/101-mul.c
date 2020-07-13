@@ -136,7 +136,7 @@ void print_mul(int *s, int len)
 	if (s[i] == 0)
 	{
 		while (s[i] == 0 && i < len)
-		       i++;
+			i++;
 	}
 	if (i == len)
 		_putchar('0');
@@ -150,7 +150,7 @@ void print_mul(int *s, int len)
 /**
  *main - entry point
  *@argc: numbers of arguments supplied to the program
- *argv: array of pointers to the arguments supplied to the program
+ *@argv: array of pointers to the arguments supplied to the program
  *
  *Return: 0 sucess
  *	  Error 98 if something fails
