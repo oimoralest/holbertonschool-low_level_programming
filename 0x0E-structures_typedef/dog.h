@@ -3,6 +3,9 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+
+typedef struct dog dog_t;
+
 /**
  *struct dog - structure with some basic data about a dog
  *@name: name of the dog
