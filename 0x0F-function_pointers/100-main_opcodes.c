@@ -23,9 +23,9 @@ int main(int argc, char *argv[])
 	}
 	for (i = 0; i < atoi(argv[1]); i++)
 	{
-		unsigned char (*ptr)() = ((unsigned char *)main)[i];
+		unsigned char c = ((unsigned char *)main)[i];
 
-		printf("%02x", *ptr);
+		printf("%02x", c);
 		if (i < atoi(argv[1]) - 1)
 			putchar(' ');
 	}
