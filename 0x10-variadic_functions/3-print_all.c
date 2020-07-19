@@ -25,40 +25,37 @@ void print_all(const char * const format, ...)
 	int i = 0, separator = 1, len = _strlen(format);
 	char *ptr = NULL;
 
-	while (format && format[i])
+	va_start(_print, format);
+	while (format[i])
 	{
-		va_start(_print, format);
-		while (format[i])
+		switch (format[i])
 		{
-			switch (format[i])
+		case 'c':
+			printf("%c", va_arg(_print, int));
+			break;
+		case 'f':
+			printf("%f", va_arg(_print, double));
+			break;
+		case 'i':
+			printf("%i", va_arg(_print, int));
+			break;
+		case 's':
+			ptr = va_arg(_print, char *);
+			if (ptr == NULL)
 			{
-			case 'c':
-				printf("%c", va_arg(_print, int));
-				break;
-			case 'f':
-				printf("%f", va_arg(_print, double));
-				break;
-			case 'i':
-				printf("%i", va_arg(_print, int));
-				break;
-			case 's':
-				ptr = va_arg(_print, char *);
-				if (ptr == NULL)
-				{
-					printf("(nil)");
-					break;
-				}
-				printf("%s", ptr);
-				break;
-			default:
-				separator = 0;
+				printf("(nil)");
 				break;
 			}
-			if (i < len - 1 && separator)
-				printf(", ");
-			i++;
+			printf("%s", ptr);
+			break;
+		default:
+			separator = 0;
+			break;
 		}
-		printf("\n");
-		va_end(_print);
+		if (i < len - 1 && separator)
+			printf(", ");
+		i++;
 	}
+	printf("\n");
+	va_end(_print);
 }
