@@ -22,16 +22,14 @@ int _strlen(const char * const str)
 void print_all(const char * const format, ...)
 {
 	va_list _print;
-	int i = 0, separator = 0, len = 0;
+	int i = 0, separator = 1, len = _strlen(format);
 	char *ptr = NULL;
 
-	len = _strlen(format);
-	while (len != 0 && format[i])
+	while (format && format[i])
 	{
 		va_start(_print, format);
 		while (format[i])
 		{
-			separator = 1;
 			switch (format[i])
 			{
 			case 'c':
