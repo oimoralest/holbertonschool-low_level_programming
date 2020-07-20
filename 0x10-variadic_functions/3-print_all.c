@@ -1,19 +1,5 @@
 #include "variadic_functions.h"
 /**
- *_strlen - finds the length of a string
- *@str: string
- *
- *Return: i length of the string
- */
-int _strlen(const char * const str)
-{
-	int i = 0;
-
-	while (str[i++])
-		;
-	return (--i);
-}
-/**
  *print_all - prints anything
  *@format: formant to print
  *
@@ -22,16 +8,16 @@ int _strlen(const char * const str)
 void print_all(const char * const format, ...)
 {
 	va_list _print;
-	int i = 0, separator = 0, len = _strlen(format);
+	int i = 0, separator = 0;
 	char *ptr = NULL;
 
 	va_start(_print, format);
-	while (len && format[i])
+	while (format && format[i])
 	{
 		while (format[i])
 		{
 			separator = 1;
-			switch (format[i])
+			switch (format[i++])
 			{
 			case 'c':
 				printf("%c", va_arg(_print, int));
@@ -55,7 +41,7 @@ void print_all(const char * const format, ...)
 				separator = 0;
 				break;
 			}
-			if (i++ < len - 1 && separator)
+			if (format[i] && separator)
 				printf(", ");
 		}
 		printf("\n");
