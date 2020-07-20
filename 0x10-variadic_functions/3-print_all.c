@@ -53,8 +53,9 @@ void print_all(const char * const format, ...)
 			separator = 0;
 			break;
 		}
-		if (i++ < len - 1 && separator)
+		if (i < len - 1 && separator)
 			printf(", ");
+		i++;
 	}
 	printf("\n");
 	va_end(_print);
