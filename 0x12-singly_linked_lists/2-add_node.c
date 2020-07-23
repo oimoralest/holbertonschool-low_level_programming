@@ -9,8 +9,8 @@ int str_len(const char *str)
 {
 	int i = 0;
 
-	while (str[++i])
-		;
+	while (str[i] != '\0')
+		i++;
 
 	return (i);
 }
