@@ -3,17 +3,13 @@
 This project is a continuation of 0x12. C - Singly linked lists
 
 ### struct listint_s - structure used for the examples
-
+`````
 typedef struct listint_s
-
 {
-
     int n;
-
     struct listint_s *next;
-    
 } listint_t;
-
+`````
 See: [lists.h](./lists.h)
 
 ## [0-print_listint.c](./0-print_listint.c)
