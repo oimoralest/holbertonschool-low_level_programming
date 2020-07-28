@@ -9,7 +9,7 @@ void free_listint2(listint_t **head)
 {
 	listint_t *aux;
 
-	if(head)
+	if (head)
 	{
 		aux = *head;
 		while (*head)
