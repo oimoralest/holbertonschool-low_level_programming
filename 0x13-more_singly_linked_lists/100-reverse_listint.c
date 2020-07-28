@@ -9,7 +9,7 @@ listint_t *reverse_listint(listint_t **head)
 {
 	listint_t *aux, *aux2;
 
-	if (head)
+	if (head && *head)
 	{
 		aux = *head;
 		aux2 = aux->next;
