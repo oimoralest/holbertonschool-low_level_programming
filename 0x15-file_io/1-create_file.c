@@ -16,7 +16,12 @@ int create_file(const char *filename, char *text_content)
 	file_descriptor = open(filename, O_CREAT | O_WRONLY | O_TRUNC, 0600);
 	if (file_descriptor == -1)
 		return (-1);
-	while (text_content[i] && text_content)
+	if (!text_content)
+	{
+		close(file_descriptor);
+		return (1);
+	}
+	while (text_content[i])
 	{
 		aux_write = write(file_descriptor, &text_content[i], 1);
 		if (aux_write == -1)
