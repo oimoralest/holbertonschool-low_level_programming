@@ -70,6 +70,6 @@ int main(int argc, char *argv[])
 			close(fd_to) == -1 ? fd_to : 99, argv[2]));
 	}
 
-	return (close(fd_from) == -1 ? print_errors(fd_from , NULL) :
+	return (close(fd_from) == -1 ? print_errors(fd_from, NULL) :
 		close(fd_to) == -1 ? print_errors(fd_to, NULL) : 0);
 }
