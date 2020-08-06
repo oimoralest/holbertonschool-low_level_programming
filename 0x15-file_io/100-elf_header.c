@@ -190,7 +190,20 @@ void print_Entry(Elf64_Ehdr *header)
  */
 void _error(int n, char *message)
 {
-	write(STDERR_FILENO, message, str_len(message));
+	char *str = NULL;
+	int i = 0;
+
+	if (n == 98)
+	{	str = "./elf_header: Error: Not an ELF file - ";
+		while (str[i])
+			write(STDERR_FILENO, &str[i], 1), i++;
+		str = "it has the wrong magic bytes at the start\n";
+		i = 0;
+		while (str[i])
+			write(STDERR_FILENO, &str[i], 1), i++;
+	}
+	else
+		write(STDERR_FILENO, message, str_len(message));
 	exit(n);
 }
 /**
@@ -221,7 +234,7 @@ int main(int argc, char *argv[])
 		_error(99, "The file cannot be opened or readed\n");
 	check = elf_check(header);
 	if (!check)
-		_error(98, "Error: Not an ELF file - it has the wrong magic bytes at the start\n");
+		_error(98, NULL);
 	print_magic(header);
 	print_class(header);
 	print_data(header);
