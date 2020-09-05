@@ -9,7 +9,7 @@
  */
 dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 {
-	dlistint_t *aux = NULL, *new_node = NULL;
+	dlistint_t *aux, *new_node = NULL;
 
 	if (!h)
 		return (NULL);
@@ -20,32 +20,30 @@ dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 	if (!idx)
 	{
 		if (!*h)
-			new_node->next = NULL, new_node->prev = NULL;
+			new_node->next = *h, new_node->prev = *h;
 		else
-			new_node->next = *h, new_node->prev = NULL;
+		{
+			new_node->prev = NULL, new_node->next = *h;
+			new_node->next->prev = new_node;
+		}
 		*h = new_node;
 	}
 	else
 	{
 		aux = *h;
-		while (aux && idx > 0)
+		while (aux->next && idx > 0)
 			aux = aux->next, idx--;
-		if (aux)
+		if (!aux->next && idx == 0)
 		{
-			if (aux->next)
-			{
-				new_node->next = aux;
-				new_node->prev = aux->prev;
-				aux->prev->next = new_node;
-				aux->prev = new_node;
-			}
-			else
-			{
-				aux->next = new_node, new_node->prev = aux;
-				new_node->next = NULL;
-			}
+			aux->next = new_node, new_node->prev = aux;
+			new_node->next = NULL;
+		}
+		else if (aux->next && idx == 0)
+		{
+			new_node->prev = aux->prev, aux->prev->next = new_node;
+			new_node->next = aux, aux->prev = new_node;
 		}
 	}
 
-	return (!aux ? NULL : new_node);
+	return (idx == 0 ? new_node : NULL);
 }
