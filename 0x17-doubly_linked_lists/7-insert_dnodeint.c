@@ -47,5 +47,5 @@ dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 		}
 	}
 
-	return (idx == 0 ? new_node : NULL);
+	return (aux->next && idx > 0 ? NULL : new_node);
 }
