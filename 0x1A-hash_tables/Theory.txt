@@ -1,0 +1,177 @@
+										0x1A. C - Hash
+
+What is a Hash Table?
+
+	Hash table is a data structure that represents data in the form of key-value pairs.
+
+	Each key is mapped to a value in the hash table. The keys are used for indexing the values/data.
+
+		'A map is an Abstract Data Type (ADT) where key-value pair are stored in an array'
+
+	A similar approach is applied by an associative array
+
+					| Key | Data |
+
+	In C:
+
+		struct table
+		{
+			type key
+			type data
+		} table_s;
+
+		table_s *array = malloc(size_of_array * sizeof(table_s));
+
+	In a hash table, the keys are processed to produce a new index that maps to the required element.
+
+	This process is called hashing: 
+		Let h(x) be a has function and k be a key.
+
+		h(k) is calculated and it is used as an index for the element
+
+	Limitations:
+		If the same index is produced by the hash function for multiple keys then, conflict arises
+
+Hash function
+
+	A hash function os any function that can be used to map data of arbitrary size to fixed-size values.
+
+	The value returned by a hash function are called hash values, hash codes, digests, or simply hashes.
+
+	Use of a hash function to index a hash table is called hashing or scatter storage storage addressing.
+
+	A hash function may be considered to perform three functions:
+
+		- Convert variable length keys into fixed length values, by folding them by words or other units
+		using a parity-preserving operator like ADD or XOR
+
+		- Scramble the bits of the key so that the resulting values are uniformly distributed over the
+		space
+
+		- Map the key values into ones less than or equal to the size of the table
+
+	Properties
+
+		- Uniformity: A good function should map the expected inputs as evenly as possible over its output
+		range. That is, every hash value in the output range should be generated with roughly the same
+		probability.The reason for this last requirement is that the cost of hashing-methods goes up
+		sharply as the number of collisions increases.
+
+		- Testing and measurement: When testing a hash function, the uniformity of the distribution of 
+		hash values can be evaluated by the chi-squared test.
+
+		- Efficiency: In data storage and retrieval applications, use of a hash function is a trade off 
+		between search time and data storage space.  If search time were unbounded, a very compact 
+		unordered linear list would be the best medium; if storage space were unbounded, a randomly 
+		accessible structure indexable by the key value would be very large, very sparse, but very fast.
+		In most applications, it is highly desirable that the hash function be computable with minimum 
+		latency and secondarily in a minimum number of instructions
+
+		- Universality: A universal hashing scheme is a randomized algorithm that selects a hashing 
+		function h among a family of such functions, in such a way that the probability of a collision 
+		of any two distinct keys is 1/m, where m is the number of distinct hash values 
+		desired—independently of the two keys. Universal hashing ensures (in a probabilistic sense) that 
+		the hash function application will behave as well as if it were using a random function, for any 
+		distribution of the input data. It will, however, have more collisions than perfect hashing and 
+		may require more operations than a special-purpose hash function.
+
+		- Applicability: A hash function is applicable in a variety of situations. A hash function that 
+		allows only certain table sizes, strings only up to a certain length, or can't accept a seed 
+		(i.e. allow double hashing) isn't as useful as one that does.
+
+		- Deterministic: A hash procedure must be deterministic—meaning that for a given input value it 
+		must always generate the same hash value. In other words, it must be a function of the data to be 
+		hashed, in the mathematical sense of the term. This requirement excludes hash functions that depend 
+		on external variable parameters, such as pseudo-random number generators or the time of day. It 
+		also excludes functions that depend on the memory address of the object being hashed in cases that 
+		the address may change during execution (as may happen on systems that use certain methods of 
+		garbage collection), although sometimes rehashing of the item is possible. The determinism is in 
+		the context of the reuse of the function.
+
+		- Defined range: It is often desirable that the output of a hash function have fixed size. Producing
+		fixed-length output from variable length input can be accomplished by breaking the input data into 
+		chunks of specific size. Hash functions used for data searches use some arithmetic expression which 
+		iteratively processes chunks of the input (such as the characters in a string) to produce the hash 
+		value.
+
+		- Variable range: In many applications, the range of hash values may be different for each run of 
+		the program, or may change along the same run (for instance, when a hash table needs to be expanded).
+		In those situations, one needs a hash function which takes two parameters—the input data z, and the 
+		number n of allowed hash values. A common solution is to compute a fixed hash function with a very 
+		large range (say, 0 to 23^2 − 1), divide the result by n, and use the division's remainder. 
+
+		- Dynamic hash function: When the hash function is used to store values in a hash table that outlives
+		the run of the program, and the hash table needs to be expanded or shrunk, the hash table is referred
+		to as a dynamic hash table. A hash function that will relocate the minimum number of records when the
+		table is resized is desirable.
+
+		- Data normalization: In some applications, the input data may contain features that are irrelevant 
+		for comparison purposes. For example, when looking up a personal name, it may be desirable to ignore 
+		the distinction between upper and lower case letters. For such data, one must use a hash function that 
+		is compatible with the data equivalence criterion being used: that is, any two inputs that are 
+		considered equivalent must yield the same hash value. This can be accomplished by normalizing the 
+		input before hashing it, as by upper-casing all letters.
+
+Collision resolution
+
+	Hash collisions are practically unavoidable when hashing a randomo subset of a large set of possible keys.
+	For example, if 2450 keys are hashed into a million of buckets, evem with a perfectly uniform random 
+	distribution, according to the birthday problem there is approximately a 95% chance of at least two of the 
+	keys being hashed to the same slot.
+
+	Therefore, almost all hash table implementations have some collision resolution strategy to handle such 
+	events. Some common strategies are described below.
+
+	Separate chaining
+
+		In the method known as separate chaining, each bucket is independent, and has some sort of list of 
+		entries with the same index. There are some implementations which give excellent performance for 
+		both time and space, with the average number of elements per bucket ranging between 5 and 100
+
+	Separate chaining with linked lists
+
+		Chained hash tables with linked lists are popular because they require only basic data structures 
+		with simple algorithms, and can use simple hash functions that are unsuitable for other methods. 
+		The cost of a table operation is that of scanning the entries of the selected bucket for the 
+		desired key. If the distribution of keys is sufficiently uniform, the average cost of a lookup 
+		depends only on the average number of keys per bucket—that is, it is roughly proportional to the 
+		load factor.
+
+		Separate chaining with list head cells
+
+			Some chaining implementations store the first record of each chain in the slot array itself.
+			The number of pointer traversals is decreased by one for most cases. The purpose is to increase 
+			cache efficiency of hash table access.
+
+	Separate chaining with other structures
+
+		Instead of a list, one can use any other data structure that supports the required operations
+
+	Open addressing
+
+		In another strategy, called open addressing, all entry records are stored in the bucket array itself. 
+		When a new entry has to be inserted, the buckets are examined, starting with the hashed-to slot and 
+		proceeding in some probe sequence, until an unoccupied slot is found. When searching for an entry, 
+		the buckets are scanned in the same sequence, until either the target record is found, or an unused 
+		array slot is found, which indicates that there is no such key in the table
+
+		Well-known probe sequences include:
+
+			- Linear probing, in which the interval between probes is fixed (usually 1). Because of good CPU 
+			cache utilization and high performance this algorithm is most widely used on modern computer 
+			architectures in hash table implementations.
+
+			- Quadratic probing, in which the interval between probes is increased by adding the successive 
+			outputs of a quadratic polynomial to the starting value given by the original hash computation.
+
+			- Double hashing, in which the interval between probes is computed by a second hash function.
+
+References:
+
+	- Hash table: https://en.wikipedia.org/wiki/Hash_table
+				  https://www.geeksforgeeks.org/hashing-data-structure/
+
+	- Hash function: https://en.wikipedia.org/wiki/Hash_function
+
+	- Videos: https://www.youtube.com/watch?v=2Ti5yvumFTU
+			  https://www.youtube.com/watch?v=shs0KM3wKv8
