@@ -96,7 +96,7 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 	return (1);
 }
 /**
- * hash_table_get - value associated with a key
+ * shash_table_get - value associated with a key
  * @ht: Hash table
  * @key: Key to search
  * Return: Value on success or NULL on failure
