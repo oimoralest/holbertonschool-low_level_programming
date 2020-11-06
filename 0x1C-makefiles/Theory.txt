@@ -1,0 +1,72 @@
+0x1C. C - Makefiles
+    Makefiles are a simple way to organize code compilation.
+    A Makefile consists of a set of rules. A rule generally looks like this:
+        targets : prerequisites
+            command
+            command
+            command
+
+        - The targets are file names, separated by spaces. Typically, there is
+        only one per rule
+        - The prerequisites are also file names, separated by spaces. These
+        files need to exist before the commands for the target are run
+        - The commands are a series of steps typically used to make the
+        target(s). These need to star with a tab character, not spaces.
+
+    The main use of Make is to list out a set of directions to compile some C
+    or C++ files, although it can solve other similar problems.
+
+    The all target
+        Making multiples targets and and you want all of them to run? Make a
+        all and designate it as .PHONY. all target is usually the first in the
+        Makefile, since if you just write make in command line, without
+        specifying the target, it will build the first target. all target is
+        usually a dummy target, which does not create any files, but depends
+        on the other files
+
+        all: one two three
+        .PHONY: all
+        one:
+            touch one
+        two:
+            touch two
+        three:
+            touch three
+        clean:
+            rm -f one two three
+
+    Variables
+        Variables can only be strings
+
+            files = file1 file2
+            some_file: $(files)
+                echo "...: " $(files)
+
+        Makefile supports wildcards *, ?, [...]
+
+    Multiple target via wildcards
+        We can use the wildcard % in targets, that captures zero or more of any
+        character. Note * is not used because is just a string
+
+    Static pattern rules
+
+        targets ...: target-pattern: prereq-patterns ...
+            commands
+
+        The essence is that the a given target is matched by the target-pattern
+        (via % wildcard). Whatever was matched is called the stem. The stem is
+        then substituted into the prereq-pattern, to generate the target's
+        prereqs
+
+            objects = foo.o bar.o
+            all: $(objects)
+            .PHONY: all
+            $(objects): %.o: %.c
+                echo "call gcc to generate $@ from $<"
+            %.c:
+                touch $@
+            clean:
+                rm -f foo.c bar.c
+
+    References:
+    - Makefile Tutorial: https://makefiletutorial.com/
